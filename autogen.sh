@@ -4,6 +4,7 @@ set -e
 
 aclocal -I m4
 autoheader
+libtoolize
 autoconf
 automake -a
 rm -f config.cache || true

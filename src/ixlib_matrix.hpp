@@ -257,7 +257,8 @@ inline ixion::matrix<T,Traits>::matrix(TSize width,TSize height,InputIterator fi
 
 // matrix operators -----------------------------------------------------------
 template <class T,class Traits>
-inline ixion::matrix<T,Traits> operator*(ixion::matrix<T,Traits>::scalar_type scalar,ixion::matrix<T,Traits> const &mat) {
+inline ixion::matrix<T,Traits> operator*(typename ixion::matrix<T,Traits>::scalar_type scalar,
+                                         typename ixion::matrix<T,Traits> const &mat) {
   ixion::matrix<T,Traits> copy(mat);
   copy *= scalar;
   return copy;
@@ -267,7 +268,8 @@ inline ixion::matrix<T,Traits> operator*(ixion::matrix<T,Traits>::scalar_type sc
 
 
 template <class T,class Traits>
-inline ixion::matrix<T,Traits> operator*(ixion::matrix<T,Traits> const &mat,ixion::matrix<T,Traits>::scalar_type scalar) {
+inline ixion::matrix<T,Traits> operator*(ixion::matrix<T,Traits> const &mat,
+                                         typename ixion::matrix<T,Traits>::scalar_type scalar) {
   ixion::matrix<T,Traits> copy(mat);
   copy *= scalar;
   return copy;
@@ -277,7 +279,8 @@ inline ixion::matrix<T,Traits> operator*(ixion::matrix<T,Traits> const &mat,ixio
 
 
 template <class T,class Traits>
-inline std::istream &operator>>(std::istream &istr,ixion::matrix<T,Traits> &mat) {
+inline std::istream &operator>>(std::istream &istr,
+                                ixion::matrix<T,Traits> &mat) {
   ixion::TSize height,width;
   char c;
   istr >> height >> c >> width;
@@ -292,7 +295,8 @@ inline std::istream &operator>>(std::istream &istr,ixion::matrix<T,Traits> &mat)
 
 
 template <class T,class Traits>
-inline std::ostream &operator<<(std::ostream &ostr,ixion::matrix<T,Traits> const &mat) {
+inline std::ostream &operator<<(std::ostream &ostr,
+                                ixion::matrix<T,Traits> const &mat) {
   mat.outMatrix(ostr);
   return ostr;
   }

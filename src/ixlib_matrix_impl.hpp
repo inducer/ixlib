@@ -228,7 +228,8 @@ ixion::matrix<T,Traits> &ixion::matrix<T,Traits>::swapColumnSelf(TIndex col1,TIn
 
 
 template <class T,class Traits>
-ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::det() const {
+typename ixion::matrix<T,Traits>::entry_type 
+ixion::matrix<T,Traits>::det() const {
   if (Width != Height) EX_DIMEN
   try {
     TSize swaps;
@@ -246,7 +247,8 @@ ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::det() const {
 
 
 template <class T,class Traits>
-ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::norm(TMatrixNorm norm) const {
+typename ixion::matrix<T,Traits>::entry_type 
+ixion::matrix<T,Traits>::norm(TMatrixNorm norm) const {
   entry_type result,sum,entry;
   switch (norm) {
     case NORM_TOTAL:
@@ -293,7 +295,8 @@ ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::norm(TMatrixNorm no
 
 
 template <class T,class Traits>
-ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::trace() const {
+typename ixion::matrix<T,Traits>::entry_type 
+ixion::matrix<T,Traits>::trace() const {
   if (Width != Height) EX_DIMEN
   entry_type result = 0;
   for (TIndex i = 0;i<Width;i++)
@@ -305,7 +308,8 @@ ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::trace() const {
 
 
 template <class T,class Traits>
-ixion::matrix<T,Traits>::entry_type ixion::matrix<T,Traits>::diagonalProduct() const {
+typename ixion::matrix<T,Traits>::entry_type 
+ixion::matrix<T,Traits>::diagonalProduct() const {
   if (Width != Height) EX_DIMEN
   entry_type result = 1;
   for (TIndex i = 0;i<Width;i++)

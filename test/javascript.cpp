@@ -34,53 +34,61 @@ class callIn : public value {
 
 
 
-ref<value> callIn::call(parameter_list const &parameters) {
-  if (parameters.size() != 1) {
-    cout << "callIn needs exactly one parameter" << endl;
-    return makeNull();
+ref<value> callIn::call(parameter_list const &parameters) 
+{
+  if (parameters.size() != 1) 
+    {
+      cout << "callIn needs exactly one parameter" << endl;
+      return makeNull();
     }
-  if (parameters[0]->getType() == VT_NULL) {
-    cout << "got null" << endl;
-    return makeNull();
+  if (parameters[0]->getType() == VT_NULL) 
+    {
+      cout << "got null" << endl;
+      return makeNull();
     }
-  else if (parameters[0]->getType() == VT_INTEGER) {
-    cout << "got an int:" << parameters[0]->toInt() << endl;
-    return makeNull();
+  else if (parameters[0]->getType() == VT_INTEGER) 
+    {
+      cout << "got an int:" << parameters[0]->toInt() << endl;
+      return makeNull();
     }
-  else if (parameters[0]->getType() == VT_FLOATING_POINT) {
-    cout << "got a float:" << parameters[0]->toFloat() << endl;
-    return makeNull();
+  else if (parameters[0]->getType() == VT_FLOATING_POINT) 
+    {
+      cout << "got a float:" << parameters[0]->toFloat() << endl;
+      return makeNull();
     }
-  else if (parameters[0]->getType() == VT_STRING) {
-    cout << "got a string:" << parameters[0]->toString() << endl;
-    return makeConstant(17);
+  else if (parameters[0]->getType() == VT_STRING) 
+    {
+      cout << "got a string:" << parameters[0]->toString() << endl;
+      return makeConstant(17);
     }
   cout << "got something else" << endl;
   return makeNull();
-  }
+}
 // end complex call-in example ------------------------------------------------
 
 
 
 
 // simple call-in example -----------------------------------------------------
-IXLIB_JS_DECLARE_FUNCTION(write) {
+IXLIB_JS_DECLARE_FUNCTION(writeStr) 
+{
   FOREACH_CONST(first,parameters,parameter_list)
     cout << (*first)->toString();
   return makeNull();
-  }
+}
 // end simple call-in example -------------------------------------------------
 
 
 
 
 // simple call-in example -----------------------------------------------------
-IXLIB_JS_DECLARE_FUNCTION(writeLn) {
+IXLIB_JS_DECLARE_FUNCTION(writeLn) 
+{
   FOREACH_CONST(first,parameters,parameter_list)
     cout << (*first)->toString();
   cout << endl;
   return makeNull();
-  }
+}
 // end simple call-in example -------------------------------------------------
 
 
@@ -99,7 +107,7 @@ int main(int argc,char **argv) {
     // end complex call-in example --------------------------------------------
     
     // simple call-in example -------------------------------------------------
-    ev = new write;
+    ev = new writeStr;
     ip.RootScope->addMember("write",ev);
     // end simple call-in example ---------------------------------------------
 

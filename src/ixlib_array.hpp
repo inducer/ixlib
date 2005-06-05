@@ -116,15 +116,14 @@ namespace ixion {
   */
   template<class T,class Allocator = std::allocator<T> >
   class tracking_array: public array<T,Allocator> {
-    pointer FirstValid,LastValid;
-    
     typedef array<T,Allocator> super;
-    
+    typename super::pointer FirstValid,LastValid;
+
     public:
     tracking_array(Allocator const &alloc = Allocator())
       : super(alloc),FirstValid(NULL),LastValid(NULL)
       { }
-    tracking_array(size_type cap,Allocator const &alloc = Allocator())
+    tracking_array(typename super::size_type cap,Allocator const &alloc = Allocator())
       : super(cap,alloc),FirstValid(NULL),LastValid(NULL)
       { }
     tracking_array(tracking_array const &source)
@@ -133,11 +132,11 @@ namespace ixion {
     virtual ~tracking_array()
       { }
       
-    pointer begin() const
+    typename super::pointer begin() const
       { return FirstValid; }
-    pointer end() const
+    typename super::pointer end() const
       { return LastValid; }
-    size_type size() const { 
+    typename super::size_type size() const { 
       if (!FirstValid) 
         return 0;
       else
@@ -151,7 +150,7 @@ namespace ixion {
       return *this;
       }
     
-    virtual void allocate(size_type cap) {
+    virtual void allocate(typename super::size_type cap) {
       FirstValid = NULL;
       LastValid = NULL;
       super::allocate(cap);
@@ -162,28 +161,33 @@ namespace ixion {
       super::deallocate();
       }
       
-    virtual void construct(pointer first,pointer last,
-      const_reference value = typename tracking_array::value_type()) { 
+    virtual void construct(typename super::pointer first,
+                           typename super::pointer last,
+                           typename super::const_reference value = typename tracking_array::value_type()) { 
       if (!FirstValid || first<FirstValid) FirstValid = first;
       if (!LastValid || last>LastValid) LastValid = last;
       super::construct(first,last,value);
       }
-    virtual void construct(pointer first,pointer last,const_pointer source) { 
+    virtual void construct(typename super::pointer first,
+                           typename super::pointer last,
+                           typename super::const_pointer source) { 
       if (!FirstValid || first<FirstValid) FirstValid = first;
       if (!LastValid || last>LastValid) LastValid = last;
       super::construct(first,last,source);
       }
-    virtual void construct(pointer item,const_reference source = T()) { 
+    virtual void construct(typename super::pointer item,
+                           typename super::const_reference source = T()) { 
       if (!FirstValid || item<FirstValid) FirstValid = item;
       if (!LastValid || item+1>LastValid) LastValid = item+1;
       super::construct(item,source);
       }
-    virtual void destroy(pointer first,pointer last) { 
+    virtual void destroy(typename super::pointer first,
+                         typename super::pointer last) { 
       if (first == FirstValid) FirstValid = last;
       else if (last == LastValid) LastValid = first;
       super::destroy(first,last);
       }
-    virtual void destroy(pointer item) { 
+    virtual void destroy(typename super::pointer item) { 
       if (item+1 == LastValid) LastValid = item;
       else // this is vital if item is the last remaining item
         if (item == FirstValid) FirstValid = item+1;
@@ -219,7 +223,8 @@ namespace ixion {
       auto_array(Allocator const &alloc = Allocator())
         : super(alloc)
         { }
-      auto_array(size_type cap,Allocator const &alloc = Allocator())
+      auto_array(typename super::size_type cap,
+                 Allocator const &alloc = Allocator())
         : super(cap,alloc)
         { }
       auto_array(auto_array &source)
@@ -235,7 +240,7 @@ namespace ixion {
         return *this;
         }
     
-      virtual void allocate(size_type cap) {
+      virtual void allocate(typename super::size_type cap) {
         internal_deallocate();
         super::allocate(cap);
         }
@@ -256,7 +261,8 @@ namespace ixion {
     auto_destroy_array(Allocator const &alloc = Allocator())
       : super(alloc)
       { }
-    auto_destroy_array(size_type cap,Allocator const &alloc = Allocator())
+    auto_destroy_array(typename super::size_type cap,
+                       Allocator const &alloc = Allocator())
       : super(cap,alloc)
       { }
     auto_destroy_array(auto_destroy_array &source)
@@ -275,7 +281,7 @@ namespace ixion {
       return *this;
       }
   
-    virtual void allocate(size_type cap) {
+    virtual void allocate(typename super::size_type cap) {
       internal_destroy();
       internal_deallocate();
       super::allocate(cap);
