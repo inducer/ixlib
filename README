@@ -1,0 +1,213 @@
+-------------------------------------------------------------------------------
+Welcome to ixlib.
+-------------------------------------------------------------------------------
+
+Table of contents:
+1. What is ixlib?
+2. Installation
+3. Implementation notes
+4. FAQ
+5. Documentation
+6. TODO
+
+URL:
+	http://ixlib.sourceforge.net
+Authors:
+	Andreas Kloeckner <ak@ixion.net>, Hardy Kahl <hk@ixion.net>
+
+If you use ixlib in your project, I would love to hear from you. I
+might even advertise your project on the ixlib homepage. :-))) ixlib
+is the result of what I needed in my projects and was able to abstract
+out without too much trouble. Though it is quite a bag of mixed stuff,
+I'm sure you'll like at least one or two components.
+
+Its earliest roots go back to a library Hardy and I wrote for Watcom
+C++ under DOS. Right now, it compiles fine under Linux, Win32 and 
+FreeBSD.
+
+Have fun!
+Andreas
+
+ATTENTION! In versions 0.95.0 and 0.96.0, there have been incompatible
+changes to the JavaScript interface! See the ChangeLog for details.
+(Those changes were necessitated by major feature improvements, however.)
+
+-------------------------------------------------------------------------------
+1. What is ixlib?
+-------------------------------------------------------------------------------
+
+ixlib is a small c++ tools library based upon the standard template
+library.  It provides
+
+* a javascript interpreter (subset of ECMAscript 4, strict mode) 
+  [ixlib_javascript.hh]
+* an exception handling framework [ixlib_exbase.hh]
+* garbage collection [ixlib_garbage.hh]
+* automatic array management [ixlib_array.hh]
+* planar geometry (rectangles, regions) [ixlib_geometry.hh]
+  polygons (rasterization, convex hull, smoothing, removal of crossings) 
+  [ixlib_polygon.hh]
+* rasterization [ixlib_drawing_functions.hh]
+* matrices (including linear system solver, Cholesky and LU decomposition,
+  determinants, inversion, Gauss and Gauss-Jordan elimination)
+  [ixlib_matrix.hh]
+* command line parsing [ixlib_cmdline.hh]
+* versatile int <-> string conversions [ixlib_numconv.hh]
+* regular expressions [ixlib_re.hh]
+* XML parsing (non-DTD) [ixlib_xml.hh]
+
+Some of the guidelines I tried to follow are:
+
+* use a separate namespace "ixion"
+* try to be STL-look-alike
+* no unnecessary dependencies: you pay only for those parts that you use
+  (pay means: use disk space, take execution time)
+* no unnecessary dependencies 2: The library doesn't do any i/o by itself,
+  except if given a stream to explicitly do so. Besides flex and the STL,
+  there are no other dependencies.
+* do not use abbreviations
+* conform to standards (XML, ECMAscript)
+* do not duplicate or mimic STL functionality (e.g. no separate
+  string class), that is be strictly an STL-add-on
+* provide a complete internationalization framework for localized
+  texts and error messages
+
+Furthermore, every component of ixlib has been thoroughly tested and
+is considered production-quality code.
+
+-------------------------------------------------------------------------------
+2. Installation
+-------------------------------------------------------------------------------
+
+The usual
+
+configure [--disable-static] [--enable-debug]
+make
+make check
+make install
+
+should do the trick. You can skip the "make check" parts if you do not
+want to run the regression tests.
+
+ixlib currently depends on
+* a good c++ compiler (gcc 2.95 will do)
+* the SGI STL (i.e. an STL implementation containing a "hash_map")
+  (normally included with your c++ compiler, e.g. gcc)
+* flex
+
+-------------------------------------------------------------------------------
+3. Implementation notes
+-------------------------------------------------------------------------------
+
+Using ixlib is as easy as abc. To compile, just type
+
+c++ -c my_program.cc `ixlib-config --cflags`
+
+To link, type
+
+c++ my_program.o -o my_program `ixlib-config --libs`
+
+One word on the usage of the templates. In order to avoid incurring the
+overhead of compiling/inlining every included template into every source file,
+the following scheme is used: The declaration goes into a ixlib_*.hh
+file, and the corresponding implementation goes into ixlib_*_impl.hh.
+This implementation does not inline by default, so you will use the following
+in *one* of your c++ files for every type you desire instantiation for:
+
+#include <ixlib_foo_impl.hh>
+
+template foo_class<int>; // explicit instation for ints
+
+-------------------------------------------------------------------------------
+4. FAQ
+-------------------------------------------------------------------------------
+Q: Does ixlib work with gcc 3.0?
+A: Yes.
+
+Q: Does ixlib work with gcc 3.2?
+A: Yes.
+
+Q: Does it work with older gccs?
+A: It should, down to 2.95.x. However, a bug has been introduced into 
+gcc 2.95.4 that causes function returns to SIGABRT, so don't use
+gcc 2.95.4 with ixlib. A workaround is not known, upgrade to gcc 3.2.
+
+Q: How can I find out about the usage of a certain component?
+A: Just try the appropriate test in the test/ directory. (e.g.
+testjs.cc for the javascript interpreter)
+
+Q: Hey, you seem to have forgotten all of the implementation?
+A: No I haven't. Look in ixlib_*_impl.hh. See also (3).
+
+Q: What are the speed characteristics of the JavaScript interpreter?
+A: If it is compiled with -O -finline-functions, it is about 5 times 
+slower than Python, and about 10 times slower than Perl. It seems like
+a good match for Netscape's JS implementation. Furthermore, on my machine
+it's almost exactly 81 times faster than a C-64 executing the analogous
+code. :-)
+
+All benchmarks were taken with code anologous to this one:
+
+var i = 0;
+while (i < 100000) ++i;
+
+Leaving out the optimization approximately doubles the execution time.
+Also, ++i is a bit faster than i++, for internal reasons.
+
+Q: How can I find out what syntax variants the javascript interpreter
+supports without digging into the source?
+A: Look into test/test.js. Almost every construct that is supported
+is exercised in that file.
+
+Q: How do I create an ixlib release?
+A: [This is mainly my own checklist for doing it, you're not really
+supposed to do ixlib releases, at least, not yet :-]
+
+- enter release into changelog
+- cvs commit
+- make dist
+- test package on other computer
+- test package on win32-cross build
+- enter news item on web page (web/ directory)
+- make update-web
+- enter news item on sourceforge
+- cvs tag RELEASE_0_95_0
+- do sourceforge release of package
+- do sourceforge release of documentation
+- do sourceforge release notification
+- upload package and lsm to ftp://ftp.ibiblio.org/incoming/Linux
+- post to announcement list
+- post on freshmeat
+
+Q: I get an error compiling lex.xml.cc or lex.javascript.cc. What's up?
+A: Do the following
+
+cd src
+ed lex.xml.cc < flex-gcc3-patch.ed
+ed lex.javascript.cc < flex-gcc3-patch.ed
+cd ..
+make
+
+That should do the trick. (older flex-generated files break with gcc3)
+Another solution would be to upgrade your flex package. The one from
+Debian woody works for me.
+
+-------------------------------------------------------------------------------
+5. Documentation
+-------------------------------------------------------------------------------
+
+ixlib now has (doxygen-generated) documentation. It can be built via
+"make documentation" in the package root directory, and can the be
+found the "doc" directory.
+
+If you don't want to install doxygen, you can get a documentation tarball
+or view the same HTML documentation on-line at the ixlib homepage.
+
+-------------------------------------------------------------------------------
+6. TODO
+-------------------------------------------------------------------------------
+* ref<const T> isn't really feasible/interoperable with ref<T>
+
+* convert matrix to refs.
+
+* csg on polygons

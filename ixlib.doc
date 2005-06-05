@@ -1,0 +1,93 @@
+// THIS FILE IS NOT "THE IXLIB DOCUMENTATION". IT IS MEANT TO BE PARSED
+// BY DOXYGEN TO GENERATE THE IXLIB DOCUMENTATION. TYPE:
+//
+//  make documentation
+//
+// AND THEN LOOK IN doc/html/
+
+/*!
+\mainpage 
+
+Welcome to ixlib. 
+
+&copy; 1996-2001 by Andreas Kl&ouml;ckner (ak@ixion.net) and Hardy Kahl 
+(hk@ixion.net).
+
+Permission to use, copy, modify, and distribute this software and its
+documentation under the terms of the GNU Library General Public License is
+hereby granted. No representations are made about the suitability of
+this software for any purpose. It is provided "as is" without express
+or implied warranty. See the file COPYING included in the distribution
+for the exact details.
+
+<h2> Introduction </h2>
+
+ixlib is a C++ tools library based upon the Standard Template
+Library. It arose out of several classes and components that we wrote
+over the years and finally decided to bundle together in one package.
+It has however grown to be much more than a mixed bag of stuff
+agglomerated over the years. It contains a wide variety of 
+functionality that is all hand-implemented in ixlib. ixlib does not
+have any external library dependencies besides the Standard Template
+Library, which it tries to complement in several ways. 
+
+ixlib makes heavy use of ANSI C++ and its features, that is, it
+requires a fairly new compiler. Any version of gcc above 2.95 will do.
+One of the features ixlib uses is namespaces, in order to minimize
+namespace interference with client programs. All of ixlib is hidden
+inside the namespace "ixion", the JavaScript interpreter further
+hides inside "ixion::javascript".
+
+ixlib is gettext-integrated, currently English and German translations are
+available. (as of March 2001) 
+
+ixlib's homepage is at http://ixlib.sourceforge.net.
+
+<h2> Functionality index </h2>
+
+ixlib functionality can be roughly subdivided into the following areas:
+
+<h3> Useful little helpers </h3>
+<ul>
+  <li> types with guaranteed sizes in bits, see ixlib_base.hh.
+  <li> versatile int <-> %string conversions, see ixlib_numconv.hh.
+  <li> command line parsing, see ixion::command_line.
+  <li> internationalization, call ixlibInitI18n() to enable.
+  <li> random number generators, see ixion::float_random and ixion::int_random.
+  <li> some %string crunching tools, see ixlib_string.hh.
+  <li> some bit crunching tools, see ixlib_numeric.hh.
+  </ul>
+
+<h3> Foundation library-type functionality </h3>
+<ul>
+  <li> 
+    an %exception handling framework, 
+    with its base at ixion::base_exception.
+  <li> garbage collection, look at ixion::ref.
+  <li> automatic array management, look at ixion::array and its subclasses.
+  <li> a ring queue container, see ixion::ring_queue.
+  </ul>
+<h3> Mathematical components </h3>
+<ul>
+  <li> matrices, see ixion::matrix.
+  </ul>
+<h3> Geometrical components </h3>
+<ul>
+  <li> planar geometry, look at ixion::coord_vector, ixion::rectangle, ixion::region.
+  <li> polygons, look at ixion::polygon.
+  <li> rasterization primitives, see namespace ixion::drawing_functions
+  </ul>
+<h3> Bigger building blocks </h3>
+<ul>
+  <li> 
+    a javascript interpreter, 
+    look at class ixion::javascript::interpreter.
+    Parts of the standard JavaScript library have also been implemented,
+    see ixion::javascript::addStandardLibrary().
+  <li> regular expressions, see ixion::regex_string for a Perl-compatible
+    regex parser and matcher, and ixion::regex for a more general
+    matching component.
+  <li> xml parsing (non-DTD), see ixion::xml_file.
+  </ul>
+
+*/

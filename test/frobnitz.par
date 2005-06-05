@@ -1,0 +1,4 @@
+# This is just a demo parameter file for testcmdline
+# --style=sucky
+; --style=halfway
+--style=dumb

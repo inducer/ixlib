@@ -1,0 +1,38 @@
+#! /bin/sh
+
+failed=""
+passed=""
+
+echo --------------------------------------------------------------------------
+echo Executing tests
+echo --------------------------------------------------------------------------
+
+
+while [ ! -z "$1" ]; do
+  echo -n Executing $1...
+  if ./$1; then 
+    passed="$passed $1"
+  else
+    failed="$failed $1"
+  fi
+  shift
+done
+echo
+
+echo --------------------------------------------------------------------------
+echo Results
+echo --------------------------------------------------------------------------
+
+if [ -z "$failed" ]; then
+  echo "All tests passed. Good."
+  exit 0
+else
+  echo "*** There were failed tests. Bad."
+  echo "*** List of failed tests:"
+  echo $failed
+  echo "*** List of passed tests:"
+  echo $passed
+  echo --------------------------------------------------------------------------
+  exit 1
+fi
+  

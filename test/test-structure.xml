@@ -1,0 +1,202 @@
+<animation>
+  <font name="New Font" topline="0" bottomline="16" baseline="16">
+    <glyph code="32" base_x="0" base_y="16" width="16" bound_x="0" bound_y="0" bound_w="1" bound_h="1"/>
+    <glyph code="33" base_x="-7" base_y="16" width="16" bound_x="1" bound_y="0" bound_w="4" bound_h="16"/>
+    <glyph code="34" base_x="-4" base_y="16" width="16" bound_x="5" bound_y="0" bound_w="10" bound_h="4"/>
+    <glyph code="39" base_x="0" base_y="16" width="16" bound_x="15" bound_y="0" bound_w="6" bound_h="6"/>
+    <glyph code="40" base_x="-3" base_y="16" width="16" bound_x="21" bound_y="0" bound_w="10" bound_h="16"/>
+    <glyph code="41" base_x="-4" base_y="16" width="16" bound_x="31" bound_y="0" bound_w="11" bound_h="16"/>
+    <glyph code="43" base_x="-5" base_y="12" width="16" bound_x="42" bound_y="0" bound_w="8" bound_h="8"/>
+    <glyph code="44" base_x="0" base_y="6" width="16" bound_x="50" bound_y="0" bound_w="6" bound_h="6"/>
+    <glyph code="45" base_x="-4" base_y="10" width="16" bound_x="56" bound_y="0" bound_w="9" bound_h="4"/>
+    <glyph code="46" base_x="-7" base_y="5" width="16" bound_x="65" bound_y="0" bound_w="3" bound_h="4"/>
+    <glyph code="48" base_x="-1" base_y="16" width="16" bound_x="68" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="49" base_x="-2" base_y="16" width="16" bound_x="83" bound_y="0" bound_w="9" bound_h="16"/>
+    <glyph code="50" base_x="0" base_y="16" width="16" bound_x="92" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="51" base_x="0" base_y="16" width="16" bound_x="107" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="52" base_x="0" base_y="16" width="16" bound_x="122" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="53" base_x="0" base_y="16" width="16" bound_x="137" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="54" base_x="0" base_y="16" width="16" bound_x="152" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="55" base_x="0" base_y="16" width="16" bound_x="167" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="56" base_x="0" base_y="16" width="16" bound_x="182" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="57" base_x="0" base_y="16" width="16" bound_x="197" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="58" base_x="-6" base_y="13" width="16" bound_x="212" bound_y="0" bound_w="4" bound_h="10"/>
+    <glyph code="59" base_x="-2" base_y="12" width="16" bound_x="216" bound_y="0" bound_w="7" bound_h="12"/>
+    <glyph code="61" base_x="-4" base_y="11" width="16" bound_x="223" bound_y="0" bound_w="9" bound_h="9"/>
+    <glyph code="63" base_x="0" base_y="16" width="16" bound_x="232" bound_y="0" bound_w="14" bound_h="16"/>
+    <glyph code="65" base_x="0" base_y="16" width="16" bound_x="246" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="66" base_x="0" base_y="16" width="16" bound_x="261" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="67" base_x="0" base_y="16" width="16" bound_x="276" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="68" base_x="0" base_y="16" width="16" bound_x="291" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="69" base_x="0" base_y="16" width="16" bound_x="306" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="70" base_x="0" base_y="16" width="16" bound_x="321" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="71" base_x="0" base_y="16" width="16" bound_x="336" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="72" base_x="0" base_y="16" width="16" bound_x="351" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="73" base_x="-5" base_y="16" width="16" bound_x="366" bound_y="0" bound_w="7" bound_h="16"/>
+    <glyph code="74" base_x="0" base_y="16" width="16" bound_x="373" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="75" base_x="0" base_y="16" width="16" bound_x="388" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="76" base_x="0" base_y="16" width="16" bound_x="403" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="77" base_x="0" base_y="16" width="16" bound_x="418" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="78" base_x="0" base_y="16" width="16" bound_x="433" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="79" base_x="0" base_y="16" width="16" bound_x="448" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="80" base_x="0" base_y="16" width="16" bound_x="463" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="81" base_x="0" base_y="16" width="16" bound_x="478" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="82" base_x="0" base_y="16" width="16" bound_x="493" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="83" base_x="0" base_y="16" width="16" bound_x="508" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="84" base_x="0" base_y="16" width="16" bound_x="523" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="85" base_x="0" base_y="16" width="16" bound_x="538" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="86" base_x="0" base_y="16" width="16" bound_x="553" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="87" base_x="0" base_y="16" width="16" bound_x="568" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="88" base_x="0" base_y="16" width="16" bound_x="583" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="89" base_x="0" base_y="16" width="16" bound_x="598" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="90" base_x="0" base_y="16" width="16" bound_x="613" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="97" base_x="0" base_y="16" width="16" bound_x="628" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="98" base_x="0" base_y="16" width="16" bound_x="643" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="99" base_x="0" base_y="16" width="16" bound_x="658" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="100" base_x="0" base_y="16" width="16" bound_x="673" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="101" base_x="0" base_y="16" width="16" bound_x="688" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="102" base_x="0" base_y="16" width="16" bound_x="703" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="103" base_x="0" base_y="16" width="16" bound_x="718" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="104" base_x="0" base_y="16" width="16" bound_x="733" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="105" base_x="-5" base_y="16" width="16" bound_x="748" bound_y="0" bound_w="7" bound_h="16"/>
+    <glyph code="106" base_x="0" base_y="16" width="16" bound_x="755" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="107" base_x="0" base_y="16" width="16" bound_x="770" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="108" base_x="0" base_y="16" width="16" bound_x="785" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="109" base_x="0" base_y="16" width="16" bound_x="800" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="110" base_x="0" base_y="16" width="16" bound_x="815" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="111" base_x="0" base_y="16" width="16" bound_x="830" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="112" base_x="0" base_y="16" width="16" bound_x="845" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="113" base_x="0" base_y="16" width="16" bound_x="860" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="114" base_x="0" base_y="16" width="16" bound_x="875" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="115" base_x="0" base_y="16" width="16" bound_x="890" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="116" base_x="0" base_y="16" width="16" bound_x="905" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="117" base_x="0" base_y="16" width="16" bound_x="920" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="118" base_x="0" base_y="16" width="16" bound_x="935" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="119" base_x="0" base_y="16" width="16" bound_x="950" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="120" base_x="0" base_y="16" width="16" bound_x="965" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="121" base_x="0" base_y="16" width="16" bound_x="980" bound_y="0" bound_w="15" bound_h="16"/>
+    <glyph code="122" base_x="0" base_y="16" width="16" bound_x="995" bound_y="0" bound_w="15" bound_h="16"/>
+  </font>
+  <!--
+    parameters used:
+    
+    state: stand,walk,jump,fly,land
+    direction: 00,01,02,03,... 20, as if the clock had 20 hours
+    weapon: none,bazooka
+    model: mole
+    -->
+  <images>
+    <image name="bazooka-d05" src="mole_bazooka_look_05.png"/>
+    <image name="bazooka-d03" src="mole_bazooka_look_03.png"/>
+    <image name="bazooka-d01" src="mole_bazooka_look_01.png"/>
+    <image name="bazooka-d15" src="mole_bazooka_look_05.png" scale_x="-1"/>
+    <image name="bazooka-d17" src="mole_bazooka_look_03.png" scale_x="-1"/>
+    <image name="bazooka-d19" src="mole_bazooka_look_01.png" scale_x="-1"/>
+
+    <!-- walking images ------------------------------------------------------>
+    <image name="bazooka-d05-walk00" src="mole_bazooka_walk00_05.png"/>
+    <image name="bazooka-d15-walk00" src="mole_bazooka_walk00_05.png" scale_x="-1"/>
+
+    <!-- crouched images ----------------------------------------------------->
+    <image name="bazooka-d05-crouch-1" src="mole_bazooka_look_05.png" scale_y="0.9"/>
+    <image name="bazooka-d05-crouch-2" src="mole_bazooka_look_05.png" scale_y="0.85"/>
+    <image name="bazooka-d15-crouch-1" src="mole_bazooka_look_05.png" scale_x="-1" scale_y="0.9"/>
+    <image name="bazooka-d15-crouch-2" src="mole_bazooka_look_05.png" scale_x="-1" scale_y="0.85"/>
+    </images>
+  
+  <regexes>
+    <!-- normalize directions ---------------------------------------------- -->
+    <regex original="d0[0-2]" replacement="d01"/>
+    <regex original="d0[3-4]" replacement="d03"/>
+    <regex original="d0[5-9]" replacement="d05"/>
+    <regex original="d1[1-5]" replacement="d15"/>
+    <regex original="d1[6-7]" replacement="d17"/>
+    <regex original="d1[7-9]" replacement="d19"/>
+
+    <!-- jump -------------------------------------------------------------- -->
+    <regex original="d0.-prejump" replacement="d05-crouch"/>
+    <regex original="d1.-prejump" replacement="d15-crouch"/>
+    <regex original="d0.-jump" replacement="d01"/>
+    <regex original="d1.-jump" replacement="d19"/>
+
+    <!-- land -------------------------------------------------------------- -->
+    <regex original="d0.-land" replacement="d05-crouch"/>
+    <regex original="d1.-land" replacement="d15-crouch"/>
+
+    <!-- walk -------------------------------------------------------------- -->
+    <regex original="d0.-walk" replacement="d05-walk"/>
+    <regex original="d1.-walk" replacement="d15-walk"/>
+    </regexes>
+  
+  <script>
+    <!-- direction set handler --------------------------------------------- -->
+    <on parameter="direction" will_return>
+      <return kill_delay/>
+      </on>
+
+    <!-- land handler ------------------------------------------------------ -->
+    <on parameter="state" new="land" will_return>
+      <priority push/>
+      <priority value="5"/>
+      <frame name="$(weapon)-d$(direction)-land-1"/>
+      <delay time="30"/>
+      <frame name="$(weapon)-d$(direction)-land-2"/>
+      <delay time="30"/>
+      <frame name="$(weapon)-d$(direction)-land-1"/>
+      <delay time="30"/>
+      <priority pop/>
+      <return kill_delay/>
+      </on>
+
+    <!-- prejump handler --------------------------------------------------- -->
+    <on parameter="state" new="prejump" will_return priority="10">
+      <frame name="$(weapon)-d$(direction)-prejump-1"/>
+      <delay time="30"/>
+      <label name="prejump_loop"/>
+      <frame name="$(weapon)-d$(direction)-prejump-2"/>
+      <delay time="10000"/>
+      <goto target="prejump_loop"/>
+      <stop/>
+      </on>
+      
+    <!-- jump handler ------------------------------------------------------ -->
+    <on parameter="state" new="jump" priority="10">
+      <frame name="$(weapon)-d$(direction)-prejump-1"/>
+      <delay time="30"/>
+      
+      <signal name="jump"/>
+      
+      <priority push/>
+      <priority value="5"/>
+      <frame name="$(weapon)-d$(direction)-jump"/>
+      <delay time="400"/>
+      <priority pop/>
+      
+      <return kill_delay/>
+      </on>
+
+    <!-- walk handler ------------------------------------------------------ -->
+    <on parameter="state" new="walk">
+      <label name="walk_loop"/>
+      <frame name="$(weapon)-d$(direction)"/>
+      <delay time="150"/>
+      <frame name="$(weapon)-d$(direction)-walk00"/>
+      <delay time="150"/>
+      <goto target="walk_loop"/>
+      </on>
+
+    <!-- main handler ------------------------------------------------------ -->
+    <on parameter="state" new="stand">
+      <goto target="main_loop"/>
+      </on>
+
+    <on parameter="state" new="fly">
+      <goto target="main_loop"/>
+      </on>
+    
+    <label name="main_loop"/>
+    <frame name="$(weapon)-d$(direction)"/>
+    <delay time="10000"/>
+    <goto target="main_loop"/>
+    </script>
+  </animation>

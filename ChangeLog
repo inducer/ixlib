@@ -1,0 +1,441 @@
+2003-02-27  Andreas Kloeckner  <ak@ixion.net>
+
+	* fixed gcc 3.2 compilation
+	* fixed operator precedence bug 
+	  (Peder Holt <burbelgruff@users.sf.net>)
+
+2002-09-07  Andreas Kloeckner  <ak@ixion.net>
+
+	* removed gettext support
+
+2002-06-06  Andreas Kloeckner  <ak@ixion.net>
+
+	* Integrated js associative array example from
+	  Martin Oberzalek <kingleo@gmx.at>
+	
+	* Renamed *.hh -> *.hpp, *.cc -> *.cpp
+	  to be able to compile under Visual C++.
+
+2002-06-05  Andreas Kloeckner  <ak@ixion.net>
+
+	* Integrated gcc 3.0.3 compilation patch from  
+	  Martin Oberzalek <kingleo@gmx.at>
+
+2002-03-30  Andreas Kloeckner  <ak@ixion.net>
+
+	* javascript expression class now publicly available.
+
+2001-12-22  Andreas Kloeckner  <ak@ixion.net>
+
+	* js value: added default "==" operator as instance location comparison
+	* added stringification for scopes,objects and functions
+	* added correct op== handling to bound methods
+	* js array: added non-standard erase
+	* js bound method: added duplication handler
+
+2001-12-20  Andreas Kloeckner  <ak@ixion.net>
+
+	* js lexer: fixed problem with different quote-type strings
+
+2001-12-01  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_array.cc: fixed resize-array-on-access-way-too-big bug
+
+	* src/js_interpreter.cc: Added a fix for completely empty JavaScript
+	  files, which would (up to now) segfault the interpreter.
+
+2001-10-24  Andreas Kloeckner  <ak@ixion.net>
+
+	* released 0.96.2
+
+2001-10-23  Andreas Kloeckner  <ak@ixion.net>
+
+	* javascript: fixed js_string.split, Array.join 
+          (Thanks to Martin Oberzalek <kingleo@gmx.at>)
+
+2001-10-18  Andreas Kloeckner  <ak@ixion.net>
+
+	* javascript: added js_string.split, js_array::push_back,
+	  test cases for split (Thanks to Martin Oberzalek <kingleo@gmx.at>)
+
+2001-10-04  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_declaration.cc: fixed variable instatiation bug,
+	  result of introduction of eliminateWrappers()
+
+2001-10-03  Andreas Kloeckner  <ak@ixion.net>
+
+	* js: fixed class scoping, so that lexical scope variables don't
+          shadow instance variables
+
+	* js: fixed makeValue("string") by
+	  removing makeValue(bool); (breaks binary compatibility)
+
+	* bumped shlib version to 6
+
+	* js: added traps for division by zero
+
+2001-09-15  Andreas Kloeckner  <ak@ixion.net>
+
+	* added FreeBSD support (libintl fixes,math.h) 
+
+2001-07-31  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_declaration.cc: Silly me - constructorless classes would
+	  segfault the interpreter. Fixed.
+
+2001-07-17  Andreas Kloeckner  <ak@ixion.net>
+
+	* bumped version to 0.96.2, iface version to 5.
+	
+	* javascript: separated wrapper elimination and duplication,
+	  that functionality is now in two separate methods.
+
+2001-07-06  Andreas Kloeckner  <ak@ixion.net>
+
+	* released version 0.96.1 without big announcements - done to
+	  ease SDLucid 0.90.0 release.
+
+2001-07-05  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_matrix_impl.hh: implemented matrix norm,
+	  more get***() to ***() renaming
+
+2001-07-01  Andreas Kloeckner  <ak@ixion.net>
+
+	* configure.in: bumped version to 0.96.1
+
+	* src/ixlib_geometry.hh,ixlib_xml.hh: 
+	  changed names from get***() to ***(), deprecated the old versions.
+
+2001-06-29  Andreas Kloeckner  <ak@ixion.net>
+
+	* released version 0.96.0
+	* src/ixlib_random.hh: replaced fabs by NUM_ABS because of gcc3 bug
+
+2001-06-27  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_geometry.hh: added coord_vector::op!=
+
+2001-06-25  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_polygon.hh: fixed gcc3 name lookup weirdness
+
+2001-06-20  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/Makefile.am: added an ed script patch to fix the broken
+	  flex-generated code. (kludge, but works)
+
+	* made the whole library compile with gcc3.
+
+2001-06-16  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_geometry.hh: added region::size() call
+	  added rectangle::getWidth/Height/Area calls,
+          marked getSizeX/Y obsolete
+
+2001-06-10  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_numconv.hh: made float2dec behave more predictably
+
+	* src/js_value.cc: fixed string conversion of integers
+
+2001-06-09  Andreas Kloeckner  <ak@ixion.net>
+
+	* js: constructors and scoping are *much* faster and more
+	  compliant
+	
+	* src/ixlib_javascript.hh: removed context parameter for
+	  call, callAsMethod and construct. They aren't needed.
+          Further, removed the compatibility wrappers for
+          call, construct and duplicate in value.
+		  
+	  !! BE CAREFUL !!
+          If you have overloaded call(), construct() or duplicate() in any of
+	  your javascript::value implementations, *PLEASE* double-check that 
+	  their prototypes match the new ones in ixlib_javascript.hh!
+          Otherwise, you're in for some really hard-to-track errors.
+
+2001-06-06  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_exgen.hh: removed memory related exceptions, they
+	  are superceded by ANSI C++ bad_alloc.
+
+2001-06-01  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_value.cc: added string.toString()
+
+2001-05-26  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/lex.*.yy: made both scanners batch scanners for a *HUGE*
+	  performance benefit
+
+	* src/ixlib_string.hh: added encoding and decoding to/from base64
+	  (as of rfc2045)
+
+2001-05-20  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_matrix_impl.hh: normalize() variable thinko corrected,
+	  thanks to Vaughn Cato <vaughn@giantstudios.com>
+
+2001-05-09  Andreas Kloeckner  <ak@ixion.net>
+
+	* javascript: improved error reporting
+
+2001-05-04  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_value.cc: finally fixed a == null, a != null
+
+	* src/ixlib_javascript.hh: jumbled constness of value methods a bit
+          Backward-compatibility wrappers are in place to avoid major 
+	  source incompatibility. Users are encouraged to switch to the new
+	  non-const interfaces.
+
+2001-05-03  Andreas Kloeckner  <ak@ixion.net>
+
+	* configure.in: bumped version number to 0.96.0
+
+2001-05-01  Andreas Kloeckner  <ak@ixion.net>
+
+	* javascript: added support for classes
+
+2001-04-17  Andreas Kloeckner  <ak@ixion.net>
+
+	* Released version 0.95.1
+
+	* configure.in (ix_ixlib_micro_version): bumped version to 0.95.1
+
+	* src/re.cc: fixed range parsing, added test cases
+
+	* src/ixlib_re.hh: redesign, regex_string is no more a string
+	  subclass (which is nonsense, if you think about it).
+          It is now subclass to a more generic regex matcher that 
+          is a template and can be used outside the domain of strings.
+          !! This breaks binary compatibility !!
+          !! This might break source compatibility in some rare and
+             screwed-up cases !!
+
+2001-03-24  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_value.cc: added toFloat to float type and toInt to int type
+
+2001-03-23  Andreas Kloeckner  <ak@ixion.net>
+
+	* Released version 0.95.0
+	
+	* src/base.cc: disabled i18n for win32
+
+	* src/js_value.cc: function parameters were involuntarily passed by
+	  reference, fixed
+
+	* src/js_value.cc: added toInt to float and toFloat to int types
+
+        * src/js_value.cc: 1/5.0 works correctly now, returning 0.2 instead
+	  of 0.
+
+	* src/js_interpreter.cc: removed no_free_ref to RootScope,
+	  eliminating deep binding issues related to that.
+	  !!! ATTENTION !!! This also breaks source compatibility.
+          interpreter.RootScope is now a ref!
+
+	* src/ixlib_garbage.hh: added warning exceptions to
+	  no_free_ref, proper operation is now verified
+          (also required some changes to the reference_manager)
+
+	* src/ixlib_ring_queue.hh: added
+
+2001-03-21  Andreas Kloeckner  <ak@ixion.net>
+
+	* doxygen.cfg: made ixlib generate (some) documentation via doxygen.
+
+2001-03-17  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_garbage.hh: fixed bug in gc 
+	  (self-assignment of single ref)
+          and another one
+          (not declaring an explicit copy constructor on a ref,
+          even if covered by a constructor template, is fatal)
+
+2001-03-16  Andreas Kloeckner  <ak@ixion.net>
+
+	* added proper lexical scoping to javascript
+
+	* src/ixlib_garbage.hh: introduced a form of polymorphism,
+	  this needs some experimentation. source compatibility is
+	  maintained.
+
+2001-03-15  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/base.cc: added ixlibInitI18n() to allow ixlib's messages
+	  to be properly internationalized if desired.
+
+	* added correct German translations for all of ixlib's strings
+
+	* fixed some javascript brokenness introduced by code cleanup.
+
+2001-03-13  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_instruction.cc: prevented identifier redeclaration
+
+	* javascript code: cleanups, added constness
+          !!!CAUTION!!! This breaks binary and source compatibility
+          All calls to make[Constant]Int/Float/String must be changed
+          to makeConstant() or makeValue(). This is a good thing(tm) :)
+	  Further, all calls that formerly included a "want_lvalue" 
+          parameter have this parameter removed. Remove it also, or
+	  else virtual function lookup will fail to find your 
+          overrided functions!
+
+	* configure.in: bumped version to 0.95.0
+	  also bumped up interface version of shared library, to 
+	  guarantee breaking binary compatibility and forcing recompiles
+	  (as otherwise strange segfaults may result)
+
+2001-02-26  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_i18n.hh: libintl.h header doesn't need to be publicly
+	  available any more. (win32 build fix)
+
+2001-02-24  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_library.cc: win32 build fixes (constants, fp_classify)
+
+2001-02-22  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_library.cc: added non-compliant (but needed)
+	  Math.initRandom() method
+
+	* src/ixlib_random.hh: float_random.init() is now
+	  really random, the equal distribution of the random
+	  numbers has been verified
+
+	* src/ixlib_garbage.hh: added scheme to release objects
+	  out of the gc arena
+
+2001-02-12  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/js_value.cc: added diagnostic for lookup on nulls
+
+2001-01-12  Andreas Kloeckner  <ak@ixion.net>
+
+	* released version 0.94.0
+	
+	* src/js_value.cc: added code to allow (x==null) tests for
+	  all variable types
+
+2000-11-20  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/numconv.cc: fixed bug in numeral parsing
+
+	* src/string.cc: added parseCEscapes
+
+	* src/ixlib_numconv.hh (ixion): exposed evalNumeral function
+
+2000-11-19  Andreas Kloeckner  <ak@ixion.net>
+
+	* configure.in : bumped version number to 0.94.0
+
+2000-11-17  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_numconv.hh: added "default base"
+	  parameter to eval* numconv functions
+
+2000-11-06  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_garbage.hh: reimplemented hashing in
+	  garbage collector for speed gain
+
+2000-11-04  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_garbage.hh: added no_free_ref
+
+	* src/ixlib_garbage.hh: factored out common code into ref_base
+
+2000-09-17  Andreas Kloeckner  <ak@ixion.net>
+
+	* configure.in: Bumped version to 0.93.1
+
+	* src/ixlib_polygon_impl.hh: Fixed broken Graham's scan
+
+2000-09-16  Andreas Kloeckner  <ak@ixion.net>
+
+	* configure.in: win32 compilation works (-I libintl headers)
+
+	* src/ixlib_drawing_functions.hh: fixed silly drawBox bug
+
+2000-09-15  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_geometry.hh: moved getAngle functions to geometry.
+
+	* released version 0.93.0
+	
+	* README: made this one more fun to read.
+
+	* src/ixlib_polygon_impl.hh: added file.
+
+	* src/ixlib_polygon.hh: added file.
+
+	* src/ixlib_drawing_functions.hh: added file.
+
+2000-09-14  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_exgen.hh: added EC_EMPTYSET
+
+	* src/ixlib_geometry.hh: added rectangle<T>::unite
+
+2000-09-07  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/ixlib_re.hh (any_char_matcher): nasty any_char_matcher bug
+		at end of strings fixed
+
+	* src/lex.xml.yy: improved error reporting about unterminated comments
+		reverted the change to comment handling
+
+	* src/ixlib_exbase.hh : added namespace component
+
+	* configure.in: bumped version to 0.93.0
+
+	* src/re.cc: fixed bug with multiple backrefs
+
+	* test/testre.cc (TEST): added regression test case for bug
+
+2000-08-21  Andreas Kloeckner  <ak@ixion.net>
+
+	* src/re.cc: added special character classes
+
+2000-08-20  Andreas Kloeckner  <ak@ixion.net>
+
+	* regression tests available: make check
+
+	* test/testxml.cc: compilation fixes
+
+	* test/Makefile.am: removed testscanner
+
+	* test/testtextfile.cc: compilation fixes
+
+	* test/testcmdline.cc: compilation fixes
+
+	* test/testnumconv.cc: compilation fixes
+
+	* test/teststring.cc: compilation fixes
+
+	* configure.in: Bumped version number to 0.92.0
+
+	* src/re.cc and corresponding header: code cleanup and
+	  partial rewrite. now supports quantified backrefs and is
+	  *at least* 10-20 times faster on quantifiers.
+
+2000-08-19  Andreas Kloeckner  <Andreas Kloeckner <ak@ixion.net>
+
+	* Initial public 0.91.0 release.
+
+2000-08-17  Andreas Kloeckner  <Andreas Kloeckner <ak@ixion.net>
+
+	* configure fixes
+	* fixes to the garbage collector
+	* added scalar*vector operator
+	* made xml classes easier to use
+
+2000-08-16  Andreas Kloeckner  <Andreas Kloeckner <ak@ixion.net>
+
+	* Initial non-public 0.90.0 release.

@@ -1,0 +1,26 @@
+Begin4
+Title: ixlib
+Version: @VERSION@
+Entered-date: 2001-04-05
+Description: ixlib is a small c++ tools library based upon the standard template library.
+  It provides a javascript interperter, an exception handling framework,
+  garbage collection, automatic array management, planar geometry (rectangles, regions),
+  polygons (rasterization, convex hull, smoothing, removal of crossings),
+  rasterization primitives, matrices (including linear system solver, Cholesky 
+  and LU decomposition, determinants, inversion, Gauss and Gauss-Jordan elimination),
+  command line parsing, versatile int <-> string conversions, regular expressions and
+  xml parsing (non-DTD) 
+Keywords: ixlib, c++, library, tools, stl, javascript, exception, garbage collection, gc,
+  geometry, polygon, rasterization, matrix, cholesky, determinant, lu, gauss, gauss-jordan,
+  regular expression, regex, xml
+Author: ak@ixion.net (Andreas Kloeckner),
+  Hardy Kahl (hk@ixion.net)
+Maintained-by: ak@ixion.net (Andreas Kloeckner)
+Primary-site: http://ixlib.sourceforge.net
+  ixlib-@VERSION@.tar.gz
+  ixlib-doc-@VERSION@.tar.gz
+Platforms: Linux and Win32 (w/mingw) tested, other platforms might work.
+  ixlib needs a strict-ANSI C++ compiler with SGI STL hash_map libraries.
+  gcc 2.95.2 and gcc 3.0 are known to work, others might, too.
+Copying-policy: LGPL
+End
