@@ -437,7 +437,7 @@ void ixion::drawing_functions::fillEllipse(Target &target,int x,int y,int r_x,in
 
 template<class Target,class T>
 void ixion::drawing_functions::drawPolygon(Target &target,polygon<T> const &poly) {
-  FOREACH_CONST(first_seg,poly,polygon<T>) {
+  FOREACH_CONST(first_seg,poly,typename polygon<T>) {
     if ((*first_seg)->size() <= 1) continue;
     if ((*first_seg)->size() == 2) {
       drawLine(target,(*first_seg)->front()[0],(*first_seg)->front()[1],
@@ -446,7 +446,7 @@ void ixion::drawing_functions::drawPolygon(Target &target,polygon<T> const &poly
       }
 
     // at least a triangle
-    polygon_segment<T>::const_iterator 
+    typename polygon_segment<T>::const_iterator 
       next = (*first_seg)->begin(),
       last = (*first_seg)->end(),
       previous = last-1;

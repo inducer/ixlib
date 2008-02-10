@@ -40,7 +40,7 @@ namespace ixion {
         }
   
       void push_back_c(T x,T y);
-      void insert_c(super::iterator it,T x,T y);
+      void insert_c(typename super::iterator it,T x,T y);
 
       bool isPointInside(T x,T y);
       
@@ -64,7 +64,7 @@ namespace ixion {
       typedef std::vector<polygon_segment<T> *>      super;
       
     public:
-      typedef polygon_segment<T>::vertex_2d	vertex_2d;
+      typedef typename polygon_segment<T>::vertex_2d	vertex_2d;
 
     public:
       polygon() {

@@ -56,16 +56,17 @@ namespace {
   struct vertex_identifier { 
     // also identifies the line formed by this and the next vertex
     polygon_segment<T>			*Segment;
-    polygon_segment<T>::const_iterator	Vertex;
+    typename polygon_segment<T>::const_iterator	Vertex;
     
-    vertex_identifier(polygon_segment<T> *segment,polygon_segment<T>::const_iterator vertex)
+    vertex_identifier(polygon_segment<T> *segment,
+        typename polygon_segment<T>::const_iterator vertex)
       : Segment(segment),Vertex(vertex) {
       }
-    polygon_segment<T>::const_iterator next() const {
+    typename polygon_segment<T>::const_iterator next() const {
       if (Vertex+1 == Segment->end()) return Segment->begin();
       else return Vertex+1;
       }
-    polygon_segment<T>::const_iterator previous() const {
+    typename polygon_segment<T>::const_iterator previous() const {
       if (Vertex == Segment->begin()) return Segment->end() - 1;
       else return Vertex-1;
       }
@@ -82,10 +83,12 @@ namespace {
 
   template<class T>
   struct vertex_and_angle {
-    const polygon_segment<T>::vertex_2d	*Vertex;
+    const typename polygon_segment<T>::vertex_2d	*Vertex;
     double				Angle;
     
-    vertex_and_angle(polygon_segment<T>::vertex_2d const *vertex,double angle)
+    vertex_and_angle(
+        typename polygon_segment<T>::vertex_2d const *vertex,
+        double angle)
       : Vertex(vertex),Angle(angle) {
       }
     bool operator<(vertex_and_angle const &vaa2) const {
@@ -118,7 +121,7 @@ void ixion::polygon_segment<T>::push_back_c(T x,T y) {
 
 
 template<class T>
-void ixion::polygon_segment<T>::insert_c(super::iterator it,T x,T y) {
+void ixion::polygon_segment<T>::insert_c(typename super::iterator it,T x,T y) {
   insert(it,vertex_2d(x,y));
   }
 
@@ -127,15 +130,15 @@ void ixion::polygon_segment<T>::insert_c(super::iterator it,T x,T y) {
 
 template<class T>
 bool ixion::polygon_segment<T>::isPointInside(T x,T y) {
-  if (size() <= 2) return false;
+  if (this->size() <= 2) return false;
   
   vertex_2d poo = getPointOnOutside();
   vertex_2d poi(x,y);
   TSize crossings = 0;
   TSize endpoints = 0;
   
-  const_iterator next = begin(),
-    last = end(),
+  typename super::const_iterator next = this->begin(),
+    last = this->end(),
     previous = last - 1;
   while (next != last) {
     TLineCrossState result = lineCross(poi,poo,*previous,*next);
@@ -154,7 +157,7 @@ bool ixion::polygon_segment<T>::isPointInside(T x,T y) {
 
 template<class T>
 void ixion::polygon_segment<T>::removeCrossings() {
-  if (size() < 4) return;
+  if (this->size() < 4) return;
   
   // we need to use numbers to index since iterators become invalid 
   // when changing the container
@@ -164,19 +167,19 @@ void ixion::polygon_segment<T>::removeCrossings() {
 
 restart_algorithm:
   next = 0;
-  last = size();
+  last = this->size();
   previous = last - 1;
   
   while (next != last) {
     runner = next + 1;
     while (runner < last - 1) {
       TLineCrossState result = lineCross(
-        operator[](previous),operator[](next),
-	operator[](runner),operator[](runner + 1),&crossing);
+        this->operator[](previous),this->operator[](next),
+	this->operator[](runner),this->operator[](runner + 1),&crossing);
       if (result == CROSS) {
-        reverse(begin() + next,begin() + runner + 1);
-        insert(begin() + runner + 1,crossing);
-        insert(begin() + next,crossing);
+        reverse(this->begin() + next,this->begin() + runner + 1);
+        insert(this->begin() + runner + 1,crossing);
+        insert(this->begin() + next,crossing);
         
         if (next < previous)
 	  /* this is necessary if we are still processing
@@ -192,7 +195,7 @@ restart_algorithm:
           goto restart_algorithm;
 	
 	runner = next + 1;
-	last = size();
+	last = this->size();
         }
       else 
         runner++;
@@ -210,8 +213,8 @@ template<class T>
 void ixion::polygon_segment<T>::smooth(polygon_segment &dest) const {
   dest.clear();
   
-  const_iterator next = begin(),
-    last = end(),
+  typename super::const_iterator next = this->begin(),
+    last = this->end(),
     previous = last - 1;
   while (next != last) {
     dest.push_back(*previous + (*next-*previous)/3);
@@ -229,8 +232,8 @@ template<class T>
 void ixion::polygon_segment<T>::subdivide(polygon_segment &dest) const {
   dest.clear();
   
-  const_iterator next = begin(),
-    last = end(),
+  typename super::const_iterator next = this->begin(),
+    last = this->end(),
     previous = last - 1;
   while (next != last) {
     dest.push_back(*previous + (*next-*previous)/2);
@@ -255,19 +258,19 @@ void ixion::polygon_segment<T>::makeConvexHull(polygon_segment &dest) const {
   typedef std::vector<vertex_and_angle<T> > angle_list;
   angle_list angles;
   
-  FOREACH_CONST(first,*this,polygon_segment<T>)
+  FOREACH_CONST(first,*this,typename polygon_segment<T>)
     angles.push_back(vertex_and_angle<T>(&*first,getAngle(*first-center)));
     
   sort(angles.begin(),angles.end());
   
   // obtain point that we know to be in the convex hull: the rightmost one
-  angle_list::const_iterator rightmost_vertex = angles.begin();
-  FOREACH_CONST(first,angles,angle_list)
+  typename angle_list::const_iterator rightmost_vertex = angles.begin();
+  FOREACH_CONST(first,angles,typename angle_list)
     if ((*first->Vertex)[0] > (*rightmost_vertex->Vertex)[0])
       rightmost_vertex = first;
   
   // push rightmost vertex and subsequent vertex into hull.
-  angle_list::const_iterator first = rightmost_vertex;
+  typename angle_list::const_iterator first = rightmost_vertex;
   dest.push_back(*first->Vertex);
   first++;
   if (first == angles.end()) first = angles.begin();
@@ -308,7 +311,7 @@ void ixion::polygon_segment<T>::makeConvexHull(polygon_segment &dest) const {
 template<class T>
 void ixion::polygon_segment<T>::translate(T x,T y) {
   coord_vector<T,2> displacement(x,y);
-  FOREACH(first,*this,polygon_segment<T>)
+  FOREACH(first,*this,typename polygon_segment<T>)
     *first += displacement;
   }
 
@@ -317,10 +320,12 @@ void ixion::polygon_segment<T>::translate(T x,T y) {
 
 template<class T>
 ixion::rectangle<T> ixion::polygon_segment<T>::getBoundingBox() const {
-  if (size() == 0) EXGEN_THROW(EC_EMPTYSET)
+  if (this->size() == 0) EXGEN_THROW(EC_EMPTYSET)
   
-  rectangle<T> result(front(),front());
-  const_iterator first = begin() + 1,last = end();
+  rectangle<T> result(this->front(),this->front());
+  typename super::const_iterator 
+    first = this->begin() + 1,
+          last = this->end();
   while (first != last) {
     if ((*first)[0] < result.A[0]) result.A[0] = (*first)[0];
     if ((*first)[1] < result.A[1]) result.A[1] = (*first)[1];
@@ -335,7 +340,8 @@ ixion::rectangle<T> ixion::polygon_segment<T>::getBoundingBox() const {
 
 
 template<class T>
-ixion::polygon_segment<T>::vertex_2d ixion::polygon_segment<T>::getCenter() const {
+typename ixion::polygon_segment<T>::vertex_2d 
+ixion::polygon_segment<T>::getCenter() const {
   rectangle<T> bobox = getBoundingBox();
   return (bobox.A + bobox.B) / 2;
   }
@@ -344,20 +350,24 @@ ixion::polygon_segment<T>::vertex_2d ixion::polygon_segment<T>::getCenter() cons
 
 
 template<class T>
-ixion::polygon_segment<T>::vertex_2d ixion::polygon_segment<T>::getWeightedCenter() const {
-  if (size() == 0) EXGEN_THROW(EC_EMPTYSET)
-  vertex_2d result = front();
-  const_iterator first = begin() + 1,last = end();
+typename ixion::polygon_segment<T>::vertex_2d 
+  ixion::polygon_segment<T>::getWeightedCenter() const {
+  if (this->size() == 0) EXGEN_THROW(EC_EMPTYSET)
+  vertex_2d result = this->front();
+  typename super::const_iterator 
+    first = this->begin() + 1,
+          last = this->end();
   while (first != last) 
     result += *first++;
-  return result / size();
+  return result / this->size();
   }
 
 
 
 
 template<class T>
-ixion::polygon_segment<T>::vertex_2d ixion::polygon_segment<T>::getPointOnOutside() const {
+typename ixion::polygon_segment<T>::vertex_2d 
+ixion::polygon_segment<T>::getPointOnOutside() const {
   return getBoundingBox().A - vertex_2d(1,1);
   }
 
@@ -367,7 +377,7 @@ ixion::polygon_segment<T>::vertex_2d ixion::polygon_segment<T>::getPointOnOutsid
 // polygon --------------------------------------------------------------------
 template<class T>
 ixion::polygon<T>::polygon(polygon const &src) {
-  FOREACH_CONST(first,src,polygon) {
+  FOREACH_CONST(first,src,typename polygon) {
     polygon_segment<T> *copy = new polygon_segment<T>(**first);
     push_back(copy);
     }
@@ -379,7 +389,7 @@ ixion::polygon<T>::polygon(polygon const &src) {
 template<class T>
 ixion::polygon<T> &polygon<T>::operator=(polygon const &src) {
   clear();
-  FOREACH_CONST(first,src,polygon) {
+  FOREACH_CONST(first,src,typename polygon) {
     polygon_segment<T> *copy = new polygon_segment<T>(**first);
     push_back(copy);
     }
@@ -409,7 +419,7 @@ void ixion::polygon<T>::clear() {
 template<class T>
 bool ixion::polygon<T>::isPointInside(T x,T y) {
   TSize insides = 0;
-  FOREACH_CONST(first,*this,polygon)
+  FOREACH_CONST(first,*this,typename polygon)
     if ((*first)->isPointInside(x,y)) insides++;
   return insides % 2 == 1;
   }
@@ -419,7 +429,7 @@ bool ixion::polygon<T>::isPointInside(T x,T y) {
 
 template<class T>
 void ixion::polygon<T>::smooth() {
-  FOREACH(first,*this,polygon) {
+  FOREACH(first,*this,typename polygon) {
     polygon_segment<T> *copy = new polygon_segment<T>;
     (*first)->smooth(*copy);
     delete *first;
@@ -432,7 +442,7 @@ void ixion::polygon<T>::smooth() {
 
 template<class T>
 void ixion::polygon<T>::subdivide() {
-  FOREACH(first,*this,polygon) {
+  FOREACH(first,*this,typename polygon) {
     polygon_segment<T> *copy = new polygon_segment<T>;
     (*first)->subdivide(*copy);
     delete *first;
@@ -445,7 +455,7 @@ void ixion::polygon<T>::subdivide() {
 
 template<class T>
 void ixion::polygon<T>::translate(T x,T y) {
-  FOREACH_CONST(first,*this,polygon)
+  FOREACH_CONST(first,*this,typename polygon)
     (*first)->translate(x,y);
   }
 
@@ -478,10 +488,12 @@ void ixion::polygon<T>::subtract(polygon &dest,polygon const &subtrahend) const 
 
 template<class T>
 rectangle<T> ixion::polygon<T>::getBoundingBox() const {
-  if (size() == 0) EXGEN_THROW(EC_EMPTYSET)
+  if (this->size() == 0) EXGEN_THROW(EC_EMPTYSET)
   
-  rectangle<T> result(front()->getBoundingBox());
-  const_iterator first = begin() + 1,last = end();
+  rectangle<T> result(this->front()->getBoundingBox());
+  typename super::const_iterator 
+    first = this->begin() + 1,
+          last = this->end();
   while (first != last)
     result.unite((*first++)->getBoundingBox());
 
@@ -492,7 +504,8 @@ rectangle<T> ixion::polygon<T>::getBoundingBox() const {
 
 
 template<class T>
-ixion::polygon<T>::vertex_2d ixion::polygon<T>::getCenter() const {
+typename ixion::polygon<T>::vertex_2d 
+ixion::polygon<T>::getCenter() const {
   rectangle<T> bobox = getBoundingBox();
   return (bobox.A + bobox.B) / 2;
   }
@@ -501,11 +514,14 @@ ixion::polygon<T>::vertex_2d ixion::polygon<T>::getCenter() const {
 
 
 template<class T>
-ixion::polygon<T>::vertex_2d ixion::polygon<T>::getWeightedCenter() const {
-  TSize total = front()->size();
-  vertex_2d result(front()->getWeightedCenter()*total);
+typename ixion::polygon<T>::vertex_2d 
+ixion::polygon<T>::getWeightedCenter() const {
+  TSize total = this->front()->size();
+  vertex_2d result(this->front()->getWeightedCenter()*total);
   
-  const_iterator first = begin() + 1,last = end();
+  typename super::const_iterator 
+    first = this->begin() + 1,
+          last = this->end();
   while (first != last) {
     result += (*first)->getWeightedCenter()*(*first)->size();
     total += (*first)->size();
@@ -524,9 +540,9 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
   line_list all_vertices;
 
   // create list of all vertices, sorted by y coordinate
-  FOREACH_CONST(first_seg,*this,polygon<T>) {
+  FOREACH_CONST(first_seg,*this,typename polygon<T>) {
     if ((*first_seg)->size() >= 3) {
-      FOREACH_CONST(first,**first_seg,polygon_segment<T>)
+      FOREACH_CONST(first,**first_seg,typename polygon_segment<T>)
 	all_vertices.push_back(vertex_identifier<T>(*first_seg,first));
       }
     }
@@ -537,7 +553,7 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
   // active means "crossing the current scanline"
   line_list active_vertices;
   
-  line_list::iterator 
+  typename line_list::iterator 
     next = all_vertices.begin(),
     end_all = all_vertices.end();
   
@@ -547,15 +563,15 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
   rectangle<T> bobox = getBoundingBox();
   for (T y = bobox.A[1];y <= bobox.B[1];y += step) {
     // determine vertices passed by this scanline
-    line_list::iterator end_this_line = next;
+    typename line_list::iterator end_this_line = next;
     while (end_this_line < end_all && (*end_this_line)[1] <= y)
       end_this_line++;
     
     // update active_list accordingly
-    { line_list::iterator first = next;
+    { typename line_list::iterator first = next;
       while (first != end_this_line) {
         // examine previous line
-	{ polygon_segment<T>::const_iterator
+	{ typename polygon_segment<T>::const_iterator
 	    start = first->previous(),
 	    end = first->Vertex;
 	  if ((*start)[1] != (*end)[1]) {
@@ -566,7 +582,7 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
 	      }
 	    else {
 	      // start above end, end == current vertex => deactivate
-	      FOREACH(first,active_vertices,line_list)
+	      FOREACH(first,active_vertices,typename line_list)
 	        if (first->Vertex == start) {
 		  active_vertices.erase(first);
 		  break;
@@ -576,14 +592,14 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
 	  }
 
         // examine next line
-	{ polygon_segment<T>::const_iterator
+	{ typename polygon_segment<T>::const_iterator
 	    start = first->Vertex,
 	    end = first->next();
 	  if ((*start)[1] != (*end)[1]) {
 	    // not a horizontal line
 	    if ((*start)[1] > (*end)[1]) {
 	      // start below end, start == current vertex => deactivate
-	      FOREACH(first,active_vertices,line_list)
+	      FOREACH(first,active_vertices,typename line_list)
 	        if (first->Vertex == start) {
 		  active_vertices.erase(first);
 		  break;
@@ -605,9 +621,9 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
     // of active lines with current scanline
     // assuming horizontal lines never make it onto the active list
     intersections.clear();
-    FOREACH_CONST(first,active_vertices,line_list) {
-      polygon_segment<T>::const_iterator start = first->Vertex;
-      polygon_segment<T>::const_iterator end = first->next();
+    FOREACH_CONST(first,active_vertices,typename line_list) {
+      typename polygon_segment<T>::const_iterator start = first->Vertex;
+      typename polygon_segment<T>::const_iterator end = first->next();
       
       T dx = (*end)[0] - (*start)[0];
       T dy = (*end)[1] - (*start)[1];
@@ -617,14 +633,13 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
     
     // draw hlines appropriately
     // assuming we have an even number of intersections
-    { intersection_list::const_iterator
+    { typename intersection_list::const_iterator
         first = intersections.begin(),last = intersections.end();
       while (first != last) {
         hlr(*first,y,*(first+1));
 	first += 2;
 	}
       }
-    
     
     next = end_this_line;
     }
@@ -635,6 +650,6 @@ void ixion::polygon<T>::drawScanlines(HLineRoutine const &hlr,T step) const {
 
 template<class T>
 void ixion::polygon<T>::freeSegments() {
-  FOREACH_CONST(first,*this,polygon)
+  FOREACH_CONST(first,*this,typename polygon)
     delete *first;
   }
