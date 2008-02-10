@@ -37,7 +37,7 @@ class FlexLexer;
 namespace ixion {
   struct scanner_exception : public base_exception {
     scanner_exception(TErrorCode const error,TIndex const line,std::string const &info);
-    virtual char *getText() const;
+    virtual const char *getText() const;
     };
 
 

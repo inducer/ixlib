@@ -19,7 +19,7 @@ using namespace ixion;
 
 
 // Exception support ----------------------------------------------------------
-static char *IOPlainText[] = { 
+static const char *IOPlainText[] = { 
   N_("Unmatched wildcard"),
   N_("Parameter error: wildcard"),
   N_("Path syntax error"),
@@ -50,7 +50,7 @@ static char *IOPlainText[] = {
 
 
 // io_exception ---------------------------------------------------------------
-char *io_exception::getText() const {
+char const *io_exception::getText() const {
   return _(IOPlainText[Error]);
   }
 

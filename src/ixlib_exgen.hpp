@@ -53,7 +53,7 @@
 namespace ixion {
 // generic_exception ----------------------------------------------------------
   struct generic_exception : public base_exception {
-    generic_exception(TErrorCode error,char const *info = NULL,char *module = NULL,
+    generic_exception(TErrorCode error,char const *info = NULL,char const *module = NULL,
       TIndex line = 0)
       : base_exception(error,info,module,line,"GEN") { 
       }

@@ -36,8 +36,8 @@ char base_exception::RenderBuffer[EX_INFOMAX+1+100];
 
 
 
-base_exception::base_exception(TErrorCode error,char const *info,char *module,
-  TIndex line,char *category)
+base_exception::base_exception(TErrorCode error,char const *info,char const *module,
+  TIndex line,char const *category)
 : Error(error),Module(module),Line(line),Category(category) {
   HasInfo = (info!=NULL);
   if (info) {

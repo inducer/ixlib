@@ -19,7 +19,7 @@ using namespace ixion;
 
 
 
-static char *(PlainText[]) = { 
+static const char *(PlainText[]) = { 
   N_("Unable to evaluate expression"),
   N_("Function not yet implemented"),
   N_("General error"),

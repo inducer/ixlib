@@ -35,8 +35,8 @@
 namespace ixion {
   class regex_exception : public base_exception {
     public:
-    regex_exception(TErrorCode error,char const *info = NULL,char *module = NULL,TIndex line = 0);
-    virtual char *getText() const;
+    regex_exception(TErrorCode error,char const *info = NULL,const char *module = NULL,TIndex line = 0);
+    virtual const char *getText() const;
     };
   }
 
@@ -210,7 +210,7 @@ namespace ixion {
       class any_matcher : public matcher {
         public:
           any_matcher() { 
-            MatchLength = 1; 
+            this->MatchLength = 1; 
             }
 
 	  matcher *duplicate() const;
@@ -229,7 +229,7 @@ namespace ixion {
       class start_matcher : public matcher {
         public:
           start_matcher() { 
-            MatchLength = 0; 
+            this->MatchLength = 0; 
             }
 
 	  matcher *duplicate() const;
@@ -246,7 +246,7 @@ namespace ixion {
       class end_matcher : public matcher {
         public:
           end_matcher() { 
-            MatchLength = 0;
+            this->MatchLength = 0;
             }
 
 	  matcher *duplicate() const;
@@ -263,7 +263,7 @@ namespace ixion {
       class backref_open_matcher : public matcher {
         public:
           backref_open_matcher() { 
-            MatchLength = 0; 
+            this->MatchLength = 0; 
             }
 
 	  matcher *duplicate() const;
@@ -280,7 +280,7 @@ namespace ixion {
       class backref_close_matcher : public matcher {
         public:
           backref_close_matcher() { 
-            MatchLength = 0; 
+            this->MatchLength = 0; 
             }
 
 	  matcher *duplicate() const;

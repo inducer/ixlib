@@ -23,7 +23,7 @@ using namespace ixion;
 
 
 // Plain text rendering table -------------------------------------------------
-static char *(PlainText[]) = { 
+static const char *(PlainText[]) = { 
   N_("Unknown token"),
   N_("End of input") 
   };
@@ -51,7 +51,7 @@ string const &info)
 
 
 
-char *scanner_exception::getText() const {
+char const *scanner_exception::getText() const {
   return PlainText[Error];
   }
 

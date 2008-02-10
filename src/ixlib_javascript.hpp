@@ -104,25 +104,25 @@ namespace ixion {
   
   // exceptions ---------------------------------------------------------------
   struct no_location_javascript_exception : public base_exception {
-    no_location_javascript_exception(TErrorCode error,char const *info = NULL,char *module = NULL,
+    no_location_javascript_exception(TErrorCode error,char const *info = NULL,const char *module = NULL,
       TIndex line = 0)
       : base_exception(error,info,module,line,"JS") {
       }
-    virtual char *getText() const;
+    virtual const char *getText() const;
     };
 
 
 
 
   struct javascript_exception : public base_exception {
-    javascript_exception(TErrorCode error,char const *info = NULL,char *module = NULL,
+    javascript_exception(TErrorCode error,char const *info = NULL,const char *module = NULL,
       TIndex line = 0)
       : base_exception(error,info,module,line,"JS") {
       }
-    javascript_exception(TErrorCode error,javascript::code_location const &loc,char const *info = 0,char *module = NULL,
+    javascript_exception(TErrorCode error,javascript::code_location const &loc,char const *info = 0,char const *module = NULL,
       TIndex line = 0);
     javascript_exception(no_location_javascript_exception const &half_ex,javascript::code_location const &loc);
-    virtual char *getText() const;
+    virtual const char *getText() const;
     };
 
 

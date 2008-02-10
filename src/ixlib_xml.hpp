@@ -37,12 +37,12 @@
 // xml_exception --------------------------------------------------------------
 namespace ixion {
   struct xml_exception : public base_exception {
-    xml_exception(TErrorCode error,char const *info = NULL,char *module = NULL,
-      TIndex line = 0,char *category = NULL)
+    xml_exception(TErrorCode error,char const *info = NULL,char const *module = NULL,
+      TIndex line = 0,char const *category = NULL)
       : base_exception(error,info,module,line,"XML") {
       }
     xml_exception(TErrorCode error, TIndex line = 0, char const *info = 0);
-    virtual char *getText() const;
+    virtual const char *getText() const;
     };
 
 

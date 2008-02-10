@@ -240,7 +240,7 @@ bool ixion::regex<T>::quantifier::match(backref_stack &brstack,T const &candidat
   if (quant_min == 0) quant_min = 1;
   
   TSize max_count = candidate.size() - at;
-  if (Next) max_count -= Next->minimumSubsequentMatchLength();
+  if (this->Next) max_count -= this->Next->minimumSubsequentMatchLength();
   max_count = max_count/quant_min + 1;
   
   if (MaxValid) max_count = NUM_MIN(max_count,MaxCount);
@@ -279,7 +279,7 @@ bool ixion::regex<T>::quantifier::match(backref_stack &brstack,T const &candidat
       }
     
     if (successful_indices.size()) {
-      MatchLength = successful_indices.top().Index - at;
+      this->MatchLength = successful_indices.top().Index - at;
       return true;
       }
     else return false;
@@ -287,7 +287,7 @@ bool ixion::regex<T>::quantifier::match(backref_stack &brstack,T const &candidat
   else {
     for (TSize c = 0;c <= remcount;c++) {
       if (matchNext(brstack,candidate,idx)) {
-        MatchLength = idx-at;
+        this->MatchLength = idx-at;
         return true;
         }
       // following part runs once too much, effectively: 
@@ -322,7 +322,7 @@ void ixion::regex<T>::quantifier::copy(quantifier const *src) {
 template<class T>
 ixion::regex<T>::sequence_matcher::sequence_matcher(T const &matchstr)
   : MatchStr(matchstr) { 
-  MatchLength = MatchStr.size(); 
+  this->MatchLength = MatchStr.size(); 
   }
 
 
@@ -538,10 +538,10 @@ bool ixion::regex<T>::alternative_matcher::match(backref_stack &brstack,T const 
     first = AltList.begin(),last = AltList.end();
   while (first != last) {
     if ((*first)->match(brstack,candidate,at)) {
-      MatchLength = 0;
+      this->MatchLength = 0;
       matcher const *object = *first;
       while (object != &Connector) {
-        MatchLength += object->getMatchLength();
+        this->MatchLength += object->getMatchLength();
         object = object->getNext();
         }
       return true;
@@ -557,7 +557,7 @@ bool ixion::regex<T>::alternative_matcher::match(backref_stack &brstack,T const 
 template<class T>
 void ixion::regex<T>::alternative_matcher::copy(alternative_matcher const *src) {
   super::copy(src);
-  Connector.setNext(Next,false);
+  Connector.setNext(this->Next,false);
   
   FOREACH_CONST(first,src->AltList,typename alt_list)
     addAlternative((*first)->duplicate());
@@ -589,7 +589,7 @@ ixion::regex<T>::backref_matcher::duplicate() const {
 template<class T>
 bool ixion::regex<T>::backref_matcher::match(backref_stack &brstack,T const &candidate,TIndex at) {
   T matchstr = brstack.get(Backref,candidate);
-  MatchLength = matchstr.size();
+  this->MatchLength = matchstr.size();
 
   if (at+matchstr.size() > candidate.size()) return false;
   return (T(candidate.begin()+at,candidate.begin()+at+matchstr.size()) == matchstr) &&

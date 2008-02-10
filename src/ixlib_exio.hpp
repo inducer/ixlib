@@ -55,14 +55,14 @@
 // io_exception ---------------------------------------------------------------
 namespace ixion {
   struct io_exception : public base_exception {
-    io_exception(TErrorCode error,char const *info = NULL,char *module = NULL,
+    io_exception(TErrorCode error,char const *info = NULL,char const *module = NULL,
       TIndex line = 0)
       : base_exception(error,info,module,line,"IO")
       { }
-    io_exception(char const *info = NULL,char *module = NULL,TIndex line = 0)
+    io_exception(char const *info = NULL,char const *module = NULL,TIndex line = 0)
       : base_exception(getErrNoError(),info,module,line,"IO")
       { }
-    virtual char *getText() const;
+    virtual const char *getText() const;
   
     private:
     TErrorCode getErrNoError();
